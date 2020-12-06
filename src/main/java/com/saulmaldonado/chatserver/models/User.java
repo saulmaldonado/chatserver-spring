@@ -11,6 +11,11 @@ public class User implements IUser {
     this.name = name;
   }
 
+  public User(UUID id, String name) {
+    this.id = id;
+    this.name = name;
+  }
+
   @Override
   public UUID getUserId() {
     return id;
