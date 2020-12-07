@@ -1,10 +1,12 @@
 package com.saulmaldonado.chatserver.services;
 
+import com.saulmaldonado.chatserver.exceptions.UserNotFoundException;
 import com.saulmaldonado.chatserver.models.User;
 import com.saulmaldonado.chatserver.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Objects;
 import java.util.UUID;
 
 @Service
@@ -29,7 +31,8 @@ public class UserService implements IUserService {
 
   @Override
   public boolean deleteUser(UUID id) {
-    return userRepository.delete(id);
+    User user = userRepository.delete(id);
+    return Objects.nonNull(user);
   }
 
   @Override

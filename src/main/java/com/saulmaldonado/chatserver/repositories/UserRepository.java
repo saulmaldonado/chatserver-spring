@@ -25,9 +25,9 @@ public class UserRepository implements IUserRepository {
   }
 
   @Override
-  public boolean delete(UUID id) {
-    users.remove(id);
-    return true;
+  public User delete(UUID id) {
+    return users.remove(id);
+
   }
 
   @Override

@@ -9,7 +9,7 @@ public interface IUserRepository {
 
   public User update(UUID id, User user);
 
-  public boolean delete(UUID id);
+  public User delete(UUID id);
 
   public User find(UUID id);
 }
