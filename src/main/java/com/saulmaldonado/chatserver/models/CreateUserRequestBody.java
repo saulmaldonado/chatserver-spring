@@ -1,9 +1,9 @@
 package com.saulmaldonado.chatserver.models;
 
-public class EditUserRequestBody {
+public class CreateUserRequestBody {
   public String name;
 
-  public EditUserRequestBody(String name) {
+  public CreateUserRequestBody(String name) {
     this.name = name;
   }
 }

@@ -1,4 +1,4 @@
-package com.saulmaldonado.chatserver.controllers;
+package com.saulmaldonado.chatserver.unit.services;
 
 import com.saulmaldonado.chatserver.models.User;
 import com.saulmaldonado.chatserver.repositories.UserRepository;
@@ -13,7 +13,7 @@ import java.util.UUID;
 import static org.assertj.core.api.Assertions.*;
 
 @SpringBootTest
-public class UserServiceTest {
+public class UserServiceTests {
 
   UserRepository userRepository;
   UserService userService;

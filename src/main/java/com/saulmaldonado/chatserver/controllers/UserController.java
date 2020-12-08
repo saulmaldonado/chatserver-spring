@@ -2,7 +2,7 @@ package com.saulmaldonado.chatserver.controllers;
 
 import com.saulmaldonado.chatserver.exceptions.UserNotFoundException;
 import com.saulmaldonado.chatserver.exceptions.UsernameAlreadyExistsException;
-import com.saulmaldonado.chatserver.models.CreateUserForm;
+import com.saulmaldonado.chatserver.models.CreateUserRequestBody;
 import com.saulmaldonado.chatserver.models.EditUserRequestBody;
 import com.saulmaldonado.chatserver.models.User;
 import com.saulmaldonado.chatserver.services.UserService;
@@ -30,7 +30,7 @@ public class UserController {
   }
 
   @PostMapping("/create")
-  public User createUser(@RequestBody CreateUserForm user) {
+  public User createUser(@RequestBody CreateUserRequestBody user) {
     return userService
             .createUser(user.name)
             .orElseThrow(() -> new UsernameAlreadyExistsException(user.name));
@@ -46,8 +46,9 @@ public class UserController {
   }
 
   @PatchMapping("/edit/{id}")
-  public Optional<User> editUser(@PathVariable UUID id, EditUserRequestBody user) {
-    return userService.editUser(id, user.name);
+  public User editUser(@PathVariable UUID id, @RequestBody EditUserRequestBody user) {
+    Optional<User> editedUser = userService.editUser(id, user.name);
+    return editedUser.orElseThrow(() -> new UserNotFoundException(id));
   }
 
   @ExceptionHandler(UserNotFoundException.class)
