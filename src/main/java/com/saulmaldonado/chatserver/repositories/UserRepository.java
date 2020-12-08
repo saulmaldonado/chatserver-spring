@@ -22,7 +22,10 @@ public class UserRepository implements IUserRepository {
 
   @Override
   public Optional<User> update(UUID id, String name) {
-    return Optional.ofNullable(users.put(id, new User(id, name)));
+    User newUser = new User(id, name);
+    users.put(id, newUser);
+
+    return Optional.of(newUser);
   }
 
   @Override
