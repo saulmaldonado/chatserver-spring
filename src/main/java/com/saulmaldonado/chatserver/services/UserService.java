@@ -40,7 +40,7 @@ public class UserService implements IUserService {
   @Override
   public Optional<User> editUser(UUID id, String name) {
     if (userRepository.findById(id).isPresent()) {
-      return userRepository.update(id, new User(id, name));
+      return userRepository.update(id, name);
     }
     return Optional.empty();
   }

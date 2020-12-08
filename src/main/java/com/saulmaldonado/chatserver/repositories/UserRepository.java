@@ -16,12 +16,13 @@ public class UserRepository implements IUserRepository {
   @Override
   public Optional<User> create(String name) {
     User newUser = new User(name);
-    return Optional.ofNullable(users.put(newUser.getUserId(), newUser));
+    users.put(newUser.getUserId(), newUser);
+    return Optional.of(newUser);
   }
 
   @Override
-  public Optional<User> update(UUID id, User user) {
-    return Optional.ofNullable(users.put(user.getUserId(), user));
+  public Optional<User> update(UUID id, String name) {
+    return Optional.ofNullable(users.put(id, new User(id, name)));
   }
 
   @Override
@@ -40,6 +41,6 @@ public class UserRepository implements IUserRepository {
             .values()
             .stream()
             .filter(user -> user.getName().equals(name))
-            .findFirst();
+            .findAny();
   }
 }

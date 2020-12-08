@@ -3,6 +3,7 @@ package com.saulmaldonado.chatserver.controllers;
 import com.saulmaldonado.chatserver.exceptions.UserNotFoundException;
 import com.saulmaldonado.chatserver.exceptions.UsernameAlreadyExistsException;
 import com.saulmaldonado.chatserver.models.CreateUserForm;
+import com.saulmaldonado.chatserver.models.EditUserRequestBody;
 import com.saulmaldonado.chatserver.models.User;
 import com.saulmaldonado.chatserver.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +43,11 @@ public class UserController {
       return String.format("User %s has been successfully deleted.", id);
     }
     throw new UserNotFoundException(id);
+  }
+
+  @PatchMapping("/edit/{id}")
+  public Optional<User> editUser(@PathVariable UUID id, EditUserRequestBody user) {
+    return userService.editUser(id, user.name);
   }
 
   @ExceptionHandler(UserNotFoundException.class)
